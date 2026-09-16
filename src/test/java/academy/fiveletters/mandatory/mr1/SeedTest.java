@@ -1,8 +1,12 @@
 package academy.fiveletters.mandatory.mr1;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Disabled;
+import academy.fiveletters.game.GameFactory;
+import academy.fiveletters.game.GameSession;
+import academy.fiveletters.game.WordDictionary;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,16 +15,26 @@ import org.junit.jupiter.api.Test;
 class SeedTest {
 
     @Test
-    @Disabled("MR1: реализуй тест и удали эту строку")
     @DisplayName("Одинаковый seed даёт одинаковое загаданное слово")
     void sameSeedProducesSameAnswer() {
-        fail("Тест не реализован");
+        WordDictionary dictionary = new WordDictionary(List.of("озеро", "арбуз", "отбор"));
+        GameSession session1 = GameFactory.startGame(dictionary, 6, 42);
+        GameSession session2 = GameFactory.startGame(dictionary, 6, 42);
+        assertEquals(session1.getAnswer(), session2.getAnswer());
     }
 
     @Test
-    @Disabled("MR1: реализуй тест и удали эту строку")
     @DisplayName("Разные seed'ы дают разные слова хотя бы иногда")
     void differentSeedsProduceDifferentAnswers() {
-        fail("Тест не реализован");
+        WordDictionary dictionary = new WordDictionary(List.of("озеро", "арбуз", "отбор"));
+        GameSession session1 = GameFactory.startGame(dictionary, 6, 0);
+        boolean foundDifferent = false;
+        for (int seed = 1; seed < 100; seed++) {
+            GameSession session2 = GameFactory.startGame(dictionary, 6, seed);
+            if (!session1.getAnswer().equals(session2.getAnswer())) {
+                foundDifferent = true;
+            }
+        }
+        assertTrue(foundDifferent);
     }
 }
