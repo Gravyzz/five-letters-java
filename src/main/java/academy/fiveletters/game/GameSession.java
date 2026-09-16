@@ -5,7 +5,6 @@ import java.util.List;
 
 public final class GameSession {
 
-    private static final int WORD_LENGTH = 5;
     private final String answer;
     private final int maxAttempts;
     private int attemptsUsed;
@@ -18,8 +17,8 @@ public final class GameSession {
             throw new IllegalArgumentException("Количество попыток должно быть положительным");
         }
 
-        if (answer == null || answer.length() != WORD_LENGTH) {
-            throw new IllegalArgumentException("Ответ должен быть задан и иметь длину " + WORD_LENGTH);
+        if (answer == null || answer.length() != GameConfig.WORD_LENGTH) {
+            throw new IllegalArgumentException("Ответ должен быть задан и иметь длину " + GameConfig.WORD_LENGTH);
         }
 
         this.answer = answer;

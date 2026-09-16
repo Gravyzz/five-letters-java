@@ -1,7 +1,7 @@
 package academy.fiveletters.mandatory.mr1;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import academy.fiveletters.game.DictionaryLoader;
 import academy.fiveletters.game.WordDictionary;
@@ -17,7 +17,7 @@ class DictionaryTest {
     @DisplayName("Словарь содержит не меньше 50 слов")
     void dictionaryContainsAtLeastFiftyWords() {
         WordDictionary dictionary = DictionaryLoader.loadDefaultDictionary();
-        assertTrue(dictionary.size() >= 50);
+        assertThat(dictionary.size()).isGreaterThanOrEqualTo(50);
     }
 
     @Test
@@ -25,13 +25,13 @@ class DictionaryTest {
     void allWordsAreExactlyFiveLettersLong() {
         WordDictionary dictionary = DictionaryLoader.loadDefaultDictionary();
         for (String word : dictionary.getWords()) {
-            assertTrue(word.length() == 5);
+            assertThat(word).hasSize(5);
         }
     }
 
     @Test
     @DisplayName("Пустой словарь приводит к ошибке, а не к запуску игры без слова")
     void emptyDictionaryIsRejected() {
-        assertThrows(IllegalArgumentException.class, () -> new WordDictionary(List.of()));
+        assertThatThrownBy(() -> new WordDictionary(List.of())).isInstanceOf(IllegalArgumentException.class);
     }
 }

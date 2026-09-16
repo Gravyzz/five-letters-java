@@ -1,7 +1,6 @@
 package academy.fiveletters.mandatory.mr1;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import academy.fiveletters.game.GameFactory;
 import academy.fiveletters.game.GameSession;
@@ -20,7 +19,7 @@ class SeedTest {
         WordDictionary dictionary = new WordDictionary(List.of("озеро", "арбуз", "отбор"));
         GameSession session1 = GameFactory.startGame(dictionary, 6, 42);
         GameSession session2 = GameFactory.startGame(dictionary, 6, 42);
-        assertEquals(session1.getAnswer(), session2.getAnswer());
+        assertThat(session1.getAnswer()).isEqualTo(session2.getAnswer());
     }
 
     @Test
@@ -35,6 +34,6 @@ class SeedTest {
                 foundDifferent = true;
             }
         }
-        assertTrue(foundDifferent);
+        assertThat(foundDifferent).isTrue();
     }
 }

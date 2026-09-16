@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 public final class DictionaryLoader {
 
@@ -26,7 +27,7 @@ public final class DictionaryLoader {
         try (BufferedReader reader =
                 new BufferedReader(new InputStreamReader(openDefaultResource(), StandardCharsets.UTF_8))) {
 
-            ArrayList<String> words = new ArrayList<>();
+            List<String> words = new ArrayList<>();
             String line = reader.readLine();
             while (line != null) {
                 String cleanedLine = line.strip();

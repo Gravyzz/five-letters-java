@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public final class WordDictionary {
     private final List<String> words;
 
-    private static final Pattern VALID_WORD_PATTERN = Pattern.compile("[а-я]{5}");
+    private static final Pattern VALID_WORD_PATTERN = Pattern.compile("[а-я]{" + GameConfig.WORD_LENGTH + "}");
 
     public WordDictionary(List<String> words) {
         if (words == null || words.isEmpty()) {
