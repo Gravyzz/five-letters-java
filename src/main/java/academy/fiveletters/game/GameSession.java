@@ -47,4 +47,24 @@ public final class GameSession {
     public List<String> getAttemptsHistory() {
         return List.copyOf(attemptsHistory);
     }
+
+    void recordGuess(GuessResult result) {
+        if (status != GameStatus.IN_PROGRESS) {
+            throw new IllegalStateException("Нельзя добавить попытку в завершённую партию");
+        }
+
+        if (result == null) {
+            throw new IllegalArgumentException("Результат попытки не может быть null");
+        }
+
+        String guess = result.getGuess();
+        attemptsHistory.add(guess);
+        attemptsUsed++;
+
+        if (guess.equals(answer)) {
+            status = GameStatus.WIN;
+        } else if (attemptsUsed == maxAttempts) {
+            status = GameStatus.LOSE;
+        }
+    }
 }

@@ -1,8 +1,15 @@
 package academy.fiveletters.mandatory.mr2;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.junit.jupiter.api.Disabled;
+import academy.fiveletters.game.GameFactory;
+import academy.fiveletters.game.GameRules;
+import academy.fiveletters.game.GameSession;
+import academy.fiveletters.game.GameStatus;
+import academy.fiveletters.game.GuessResult;
+import academy.fiveletters.game.WordDictionary;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,38 +21,67 @@ class GuessValidationTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"дом", "домики", ""})
-    @Disabled("MR2: реализуй тест и удали эту строку")
     @DisplayName("Слово не из 5 букв отклоняется: \"{0}\"")
     void wordOfWrongLengthIsRejected(String guess) {
-        fail("Тест не реализован");
+        WordDictionary dictionary = new WordDictionary(List.of("озеро"));
+        GameRules rules = new GameRules(dictionary);
+        GameSession session = GameFactory.startGame(dictionary, 6, 0);
+        assertThatThrownBy(() -> rules.applyGuess(session, guess)).isInstanceOf(IllegalArgumentException.class);
+        assertThat(session.getAttemptsUsed()).isEqualTo(0);
+        assertThat(session.getAttemptsHistory()).isEmpty();
+        assertThat(session.getStatus()).isEqualTo(GameStatus.IN_PROGRESS);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"дом12", "дом!!", "до ма"})
-    @Disabled("MR2: реализуй тест и удали эту строку")
     @DisplayName("Ввод с не-буквами отклоняется: \"{0}\"")
     void nonLetterInputIsRejected(String guess) {
-        fail("Тест не реализован");
+        WordDictionary dictionary = new WordDictionary(List.of("озеро"));
+        GameRules rules = new GameRules(dictionary);
+        GameSession session = GameFactory.startGame(dictionary, 6, 0);
+        assertThatThrownBy(() -> rules.applyGuess(session, guess)).isInstanceOf(IllegalArgumentException.class);
+        assertThat(session.getAttemptsUsed()).isEqualTo(0);
+        assertThat(session.getAttemptsHistory()).isEmpty();
+        assertThat(session.getStatus()).isEqualTo(GameStatus.IN_PROGRESS);
     }
 
     @Test
-    @Disabled("MR2: реализуй тест и удали эту строку")
     @DisplayName("Слово, которого нет в словаре, отклоняется")
     void wordOutsideDictionaryIsRejected() {
-        fail("Тест не реализован");
+        WordDictionary dictionary = new WordDictionary(List.of("озеро"));
+        GameRules rules = new GameRules(dictionary);
+        GameSession session = GameFactory.startGame(dictionary, 6, 0);
+        assertThatThrownBy(() -> rules.applyGuess(session, "арбуз")).isInstanceOf(IllegalArgumentException.class);
+        assertThat(session.getAttemptsUsed()).isEqualTo(0);
+        assertThat(session.getAttemptsHistory()).isEmpty();
+        assertThat(session.getStatus()).isEqualTo(GameStatus.IN_PROGRESS);
     }
 
     @Test
-    @Disabled("MR2: реализуй тест и удали эту строку")
     @DisplayName("Некорректный ввод не тратит попытку")
     void invalidInputDoesNotConsumeAttempt() {
-        fail("Тест не реализован");
+        WordDictionary dictionary = new WordDictionary(List.of("озеро"));
+        GameRules rules = new GameRules(dictionary);
+        GameSession session = GameFactory.startGame(dictionary, 6, 0);
+        assertThatThrownBy(() -> rules.applyGuess(session, "КОТ")).isInstanceOf(IllegalArgumentException.class);
+        assertThat(session.getAttemptsUsed()).isEqualTo(0);
+        assertThat(session.getAttemptsHistory()).isEmpty();
+        assertThat(session.getStatus()).isEqualTo(GameStatus.IN_PROGRESS);
     }
 
     @Test
-    @Disabled("MR2: реализуй тест и удали эту строку")
     @DisplayName("Ввод не зависит от регистра: \"ОЗЕРО\" и \"озеро\" обрабатываются одинаково")
     void inputIsCaseInsensitive() {
-        fail("Тест не реализован");
+        WordDictionary dictionary = new WordDictionary(List.of("озеро"));
+        GameRules rules = new GameRules(dictionary);
+        GameSession session1 = GameFactory.startGame(dictionary, 6, 0);
+        GameSession session2 = GameFactory.startGame(dictionary, 6, 0);
+        GuessResult upperResult = rules.applyGuess(session1, "ОЗЕРО");
+        GuessResult lowerResult = rules.applyGuess(session2, "озеро");
+        assertThat(upperResult.getGuess()).isEqualTo("озеро");
+        assertThat(lowerResult.getGuess()).isEqualTo("озеро");
+        assertThat(upperResult.getLetterStatuses()).isEqualTo(lowerResult.getLetterStatuses());
+        assertThat(session1.getStatus()).isEqualTo(GameStatus.WIN);
+        assertThat(session2.getStatus()).isEqualTo(GameStatus.WIN);
     }
 }
