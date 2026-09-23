@@ -18,6 +18,14 @@ public final class GameRules {
     }
 
     public GuessResult applyGuess(GameSession session, String guess) {
+        String normalizedGuess = validateAndNormalizeGuess(session, guess);
+        List<LetterStatus> letterStatuses = LetterMatcher.match(session.getAnswer(), normalizedGuess);
+        GuessResult result = new GuessResult(normalizedGuess, letterStatuses);
+        session.recordGuess(result);
+        return result;
+    }
+
+    private String validateAndNormalizeGuess(GameSession session, String guess) {
         if (session == null) {
             throw new IllegalArgumentException("Сессия не должна быть null");
         }
@@ -29,7 +37,6 @@ public final class GameRules {
         if (guess == null) {
             throw new IllegalArgumentException("Попытка не должна быть null");
         }
-
         String normalizedGuess = guess.toLowerCase(Locale.ROOT);
         if (normalizedGuess.length() != GameConfig.WORD_LENGTH) {
             throw new IllegalArgumentException("Длина слова должна быть равна " + GameConfig.WORD_LENGTH);
@@ -43,9 +50,6 @@ public final class GameRules {
         if (!dictionary.contains(normalizedGuess)) {
             throw new IllegalArgumentException("Отсутствует слово в словаре");
         }
-        List<LetterStatus> letterStatuses = LetterMatcher.match(session.getAnswer(), normalizedGuess);
-        GuessResult result = new GuessResult(normalizedGuess, letterStatuses);
-        session.recordGuess(result);
-        return result;
+        return normalizedGuess;
     }
 }
