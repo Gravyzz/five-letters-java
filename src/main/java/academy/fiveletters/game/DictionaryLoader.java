@@ -15,17 +15,20 @@ public final class DictionaryLoader {
 
     private DictionaryLoader() {}
 
-    private static InputStream openDefaultResource() {
-        InputStream stream = DictionaryLoader.class.getResourceAsStream(DEFAULT_DICTIONARY_RESOURCE);
+    private static InputStream openResource(String resourcePath) {
+        InputStream stream = DictionaryLoader.class.getResourceAsStream(resourcePath);
         if (stream == null) {
-            throw new IllegalStateException("Приложение должно содержать встроенный словарь, но его нет");
+            throw new IllegalStateException("Не найден словарь: " + resourcePath);
         }
         return stream;
     }
 
-    public static WordDictionary loadDefaultDictionary() {
+    public static WordDictionary loadDictionary(String resourcePath) {
+        if (resourcePath == null || resourcePath.isBlank()) {
+            throw new IllegalArgumentException("Путь к словарю не должен быть пустым");
+        }
         try (BufferedReader reader =
-                new BufferedReader(new InputStreamReader(openDefaultResource(), StandardCharsets.UTF_8))) {
+                new BufferedReader(new InputStreamReader(openResource(resourcePath), StandardCharsets.UTF_8))) {
 
             List<String> words = new ArrayList<>();
             String line = reader.readLine();
@@ -41,5 +44,9 @@ public final class DictionaryLoader {
         } catch (IOException exception) {
             throw new UncheckedIOException("Не удалось прочитать встроенный словарь", exception);
         }
+    }
+
+    public static WordDictionary loadDefaultDictionary() {
+        return loadDictionary(DEFAULT_DICTIONARY_RESOURCE);
     }
 }
