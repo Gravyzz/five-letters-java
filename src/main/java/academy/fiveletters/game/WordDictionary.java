@@ -27,4 +27,8 @@ public final class WordDictionary {
     public List<String> getWords() {
         return words;
     }
+
+    public boolean contains(String word) {
+        return words.contains(word);
+    }
 }
