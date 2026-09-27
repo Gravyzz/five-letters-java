@@ -1,5 +1,6 @@
-package academy.fiveletters.game;
+package academy.fiveletters.game.model;
 
+import academy.fiveletters.game.GameConfig;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public final class GameSession {
     private final List<String> attemptsHistory;
     private GameStatus status;
 
-    GameSession(String answer, int maxAttempts) {
+    public GameSession(String answer, int maxAttempts) {
 
         if (maxAttempts <= 0) {
             throw new IllegalArgumentException("Количество попыток должно быть положительным");
@@ -48,7 +49,7 @@ public final class GameSession {
         return List.copyOf(attemptsHistory);
     }
 
-    void recordGuess(GuessResult result) {
+    public void recordGuess(GuessResult result) {
         if (status != GameStatus.IN_PROGRESS) {
             throw new IllegalStateException("Нельзя добавить попытку в завершённую партию");
         }

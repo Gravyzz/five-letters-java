@@ -5,10 +5,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import academy.fiveletters.game.GameFactory;
 import academy.fiveletters.game.GameRules;
-import academy.fiveletters.game.GameSession;
-import academy.fiveletters.game.GameStatus;
-import academy.fiveletters.game.GuessResult;
-import academy.fiveletters.game.WordDictionary;
+import academy.fiveletters.game.dictionary.WordDictionary;
+import academy.fiveletters.game.model.GameSession;
+import academy.fiveletters.game.model.GameStatus;
+import academy.fiveletters.game.model.GuessResult;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

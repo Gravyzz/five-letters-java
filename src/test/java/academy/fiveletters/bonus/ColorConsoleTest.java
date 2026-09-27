@@ -2,15 +2,18 @@ package academy.fiveletters.bonus;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import academy.fiveletters.game.DictionaryLoader;
 import academy.fiveletters.game.GameConfig;
 import academy.fiveletters.game.GameFactory;
-import academy.fiveletters.game.WordDictionary;
+import academy.fiveletters.game.dictionary.DictionaryLoader;
+import academy.fiveletters.game.dictionary.WordDictionary;
 import academy.fiveletters.support.CliRunner;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Цветной консольный вывод")
 class ColorConsoleTest {
     @Test
+    @DisplayName("Подсказка, ошибка и победа выводятся соответствующими цветами")
     void coloredMessagesArePrinted() {
         WordDictionary dictionary = DictionaryLoader.loadDefaultDictionary();
         String answer =

@@ -3,7 +3,7 @@ package academy.fiveletters.mandatory.mr2;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import academy.fiveletters.game.LetterMatcher;
-import academy.fiveletters.game.LetterStatus;
+import academy.fiveletters.game.model.LetterStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,15 +1,18 @@
-package academy.fiveletters.game;
+package academy.fiveletters.game.dictionary;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@DisplayName("Загрузка словарей")
 class DictionaryLoaderTest {
 
     @ParameterizedTest
+    @DisplayName("Дополнительный словарь не пуст и входит в основной")
     @ValueSource(
             strings = {
                 "/difficulty-easy.txt",
@@ -27,6 +30,7 @@ class DictionaryLoaderTest {
     }
 
     @Test
+    @DisplayName("Отсутствующий словарь отклоняется")
     void missingDictionaryIsRejected() {
         assertThatThrownBy(() -> DictionaryLoader.loadDictionary("/missing.txt"))
                 .isInstanceOf(IllegalStateException.class)

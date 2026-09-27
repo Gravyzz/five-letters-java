@@ -1,5 +1,7 @@
 package academy.fiveletters.game;
 
+import academy.fiveletters.game.model.GameStatus;
+
 public final class GameStatistics {
     private int wins;
     private int losses;

@@ -1,4 +1,4 @@
-package academy.fiveletters.game;
+package academy.fiveletters.game.dictionary;
 
 public enum Difficulty {
     EASY("/difficulty-easy.txt"),

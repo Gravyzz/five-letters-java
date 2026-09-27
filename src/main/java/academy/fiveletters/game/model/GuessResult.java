@@ -1,5 +1,6 @@
-package academy.fiveletters.game;
+package academy.fiveletters.game.model;
 
+import academy.fiveletters.game.GameConfig;
 import java.util.List;
 
 public final class GuessResult {

@@ -1,6 +1,6 @@
-package academy.fiveletters.console;
+package academy.fiveletters.console.output;
 
-final class ConsoleColors {
+public final class ConsoleColors {
 
     private ConsoleColors() {}
 

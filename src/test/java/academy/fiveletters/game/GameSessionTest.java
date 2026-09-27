@@ -3,26 +3,35 @@ package academy.fiveletters.game;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import academy.fiveletters.game.model.GameSession;
+import academy.fiveletters.game.model.GameStatus;
+import academy.fiveletters.game.model.GuessResult;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Игровая сессия")
 class GameSessionTest {
 
     @Test
+    @DisplayName("Нулевое количество попыток отклоняется")
     void zeroMaxAttemptsIsRejected() {
         assertThatThrownBy(() -> new GameSession("озеро", 0)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
+    @DisplayName("Ответ null отклоняется")
     void nullAnswerIsRejected() {
         assertThatThrownBy(() -> new GameSession(null, 5)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
+    @DisplayName("Ответ неправильной длины отклоняется")
     void answerWithWrongLengthIsRejected() {
         assertThatThrownBy(() -> new GameSession("кот", 5)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
+    @DisplayName("Новая сессия имеет ожидаемое начальное состояние")
     void newSessionHasExpectedInitialState() {
         GameSession session = new GameSession("озеро", 6);
 
@@ -34,6 +43,7 @@ class GameSessionTest {
     }
 
     @Test
+    @DisplayName("Принятая попытка обновляет сессию")
     void acceptedGuessUpdatesSession() {
         GameSession session = new GameSession("озеро", 6);
         GuessResult result = new GuessResult("арбуз", LetterMatcher.match("озеро", "арбуз"));
@@ -44,6 +54,7 @@ class GameSessionTest {
     }
 
     @Test
+    @DisplayName("Правильная последняя попытка завершает игру победой")
     void correctGuessOnLastAttemptWins() {
         GameSession session = new GameSession("озеро", 1);
         GuessResult result = new GuessResult("озеро", LetterMatcher.match("озеро", "озеро"));
@@ -54,6 +65,7 @@ class GameSessionTest {
     }
 
     @Test
+    @DisplayName("Неправильная последняя попытка завершает игру поражением")
     void wrongGuessOnLastAttemptLoses() {
         GameSession session = new GameSession("озеро", 1);
         GuessResult result = new GuessResult("арбуз", LetterMatcher.match("озеро", "арбуз"));
@@ -64,6 +76,7 @@ class GameSessionTest {
     }
 
     @Test
+    @DisplayName("После победы новая попытка отклоняется без изменения сессии")
     void guessAfterWinIsRejectedWithoutChangingSession() {
         GameSession session = new GameSession("озеро", 6);
         GuessResult result1 = new GuessResult("озеро", LetterMatcher.match("озеро", "озеро"));
@@ -76,6 +89,7 @@ class GameSessionTest {
     }
 
     @Test
+    @DisplayName("После поражения новая попытка отклоняется без изменения сессии")
     void guessAfterLoseIsRejectedWithoutChangingSession() {
         GameSession session = new GameSession("озеро", 1);
         GuessResult result1 = new GuessResult("арбуз", LetterMatcher.match("озеро", "арбуз"));

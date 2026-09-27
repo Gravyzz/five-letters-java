@@ -2,16 +2,19 @@ package academy.fiveletters.bonus;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import academy.fiveletters.game.DictionaryLoader;
 import academy.fiveletters.game.GameConfig;
 import academy.fiveletters.game.GameFactory;
-import academy.fiveletters.game.WordDictionary;
+import academy.fiveletters.game.dictionary.DictionaryLoader;
+import academy.fiveletters.game.dictionary.WordDictionary;
 import academy.fiveletters.support.CliRunner;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+@DisplayName("Игра по категории")
 class CategoryConsoleTest {
     @ParameterizedTest
+    @DisplayName("Категория задаёт ответы и принимает попытки из полного словаря")
     @CsvSource({"1, /category-animals.txt", "2, /category-food.txt", "3, /category-nature.txt"})
     void categoryUsesOwnAnswersAndAcceptsGuessFromFullDictionary(String categoryChoice, String resourcePath) {
         WordDictionary categoryDictionary = DictionaryLoader.loadDictionary(resourcePath);

@@ -1,5 +1,7 @@
 package academy.fiveletters.game;
 
+import academy.fiveletters.game.dictionary.WordDictionary;
+import academy.fiveletters.game.model.GameSession;
 import java.util.Random;
 
 public final class GameFactory {

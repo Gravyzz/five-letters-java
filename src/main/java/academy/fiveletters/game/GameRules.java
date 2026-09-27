@@ -1,5 +1,10 @@
 package academy.fiveletters.game;
 
+import academy.fiveletters.game.dictionary.WordDictionary;
+import academy.fiveletters.game.model.GameSession;
+import academy.fiveletters.game.model.GameStatus;
+import academy.fiveletters.game.model.GuessResult;
+import academy.fiveletters.game.model.LetterStatus;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;

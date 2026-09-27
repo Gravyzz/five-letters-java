@@ -1,5 +1,6 @@
 package academy.fiveletters.game;
 
+import academy.fiveletters.game.model.LetterStatus;
 import java.util.List;
 
 public final class LetterMatcher {

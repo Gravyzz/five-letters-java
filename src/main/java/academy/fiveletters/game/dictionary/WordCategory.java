@@ -1,4 +1,4 @@
-package academy.fiveletters.game;
+package academy.fiveletters.game.dictionary;
 
 public enum WordCategory {
     ANIMALS("/category-animals.txt"),

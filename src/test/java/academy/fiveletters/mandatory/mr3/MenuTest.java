@@ -2,10 +2,10 @@ package academy.fiveletters.mandatory.mr3;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import academy.fiveletters.game.DictionaryLoader;
 import academy.fiveletters.game.GameConfig;
 import academy.fiveletters.game.GameFactory;
-import academy.fiveletters.game.WordDictionary;
+import academy.fiveletters.game.dictionary.DictionaryLoader;
+import academy.fiveletters.game.dictionary.WordDictionary;
 import academy.fiveletters.support.CliRunner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

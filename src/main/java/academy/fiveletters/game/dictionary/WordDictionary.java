@@ -1,5 +1,6 @@
-package academy.fiveletters.game;
+package academy.fiveletters.game.dictionary;
 
+import academy.fiveletters.game.GameConfig;
 import java.util.List;
 import java.util.regex.Pattern;
 

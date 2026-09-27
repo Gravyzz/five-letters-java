@@ -3,8 +3,8 @@ package academy.fiveletters.mandatory.mr1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import academy.fiveletters.game.GameFactory;
-import academy.fiveletters.game.GameSession;
-import academy.fiveletters.game.WordDictionary;
+import academy.fiveletters.game.dictionary.WordDictionary;
+import academy.fiveletters.game.model.GameSession;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
